@@ -1,0 +1,8 @@
+.viscode
+bin
+obj
+*.db
+
+
+
+/node_modules
