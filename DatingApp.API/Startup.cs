@@ -55,12 +55,14 @@ namespace DatingApp.API
         app.UseDeveloperExceptionPage();
       }
 
-      // app.UseHttpsRedirection();
+
 
       app.UseRouting();
-      app.UseAuthorization();
+      app.UseAuthentication(); // this one first
       app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-      app.UseAuthentication();
+
+
+      app.UseAuthorization();
 
 
       app.UseEndpoints(endpoints =>
