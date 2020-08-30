@@ -24,6 +24,7 @@ namespace DatingApp.API.Controllers
     }
     // GET api/values
     [HttpGet]
+    [AllowAnonymous]
     public async Task<IActionResult> GetValues()
     {
       // throw new Exception("ciaoo");
@@ -33,6 +34,7 @@ namespace DatingApp.API.Controllers
       // await Task.Run(() => Thread.Sleep(5000));
       // await Task.Delay(6000);
       // Task.WaitAll(Task.Delay(5000));
+
       //   return new string[] { "value1", "value2" };
       return Ok(values);
     }

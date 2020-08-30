@@ -14,30 +14,13 @@ export class ValueComponent implements OnInit {
     this.getValue();
   }
   getValue() {
-    console.log(new Date().toLocaleString());
     this.http.get('http://localhost:5000/api/values').subscribe(
       (response) => {
-        console.log(new Date().toLocaleString());
-
         this.values = response;
       },
       (error) => {
-        console.log('erroreeeee');
         console.log(error);
       }
     );
-    console.log(new Date().toLocaleString());
-    this.http.get('http://localhost:5000/api/values').subscribe(
-      (response) => {
-        console.log(new Date().toLocaleString());
-        this.values = response;
-      },
-      (error) => {
-        console.log('erroreeeee');
-        console.log(error);
-      }
-    );
-
-    console.log('dopo');
   }
 }
