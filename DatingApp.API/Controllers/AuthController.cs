@@ -1,5 +1,6 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,7 +54,9 @@ namespace DatingApp.API.Controllers
       var claims = new[]
       {
             new Claim(ClaimTypes.NameIdentifier, loggedUser.Id.ToString()),
-            new Claim(ClaimTypes.Name, loggedUser.UserName )
+            new Claim(ClaimTypes.Name, loggedUser.UserName ),
+            new Claim("photoUrl", loggedUser.Photos.Where(x => x.isMain).DefaultIfEmpty(new Photo()).First().url)
+
         };
       var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.GetSection("AppSettings:Token").Value));
 

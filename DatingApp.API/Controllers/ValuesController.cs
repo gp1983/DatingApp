@@ -29,6 +29,7 @@ namespace DatingApp.API.Controllers
     {
       // throw new Exception("ciaoo");
       // var values = await merda();
+
       var values = await _context.Values.ToListAsync();
 
       // await Task.Run(() => Thread.Sleep(5000));

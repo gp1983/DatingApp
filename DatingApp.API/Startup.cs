@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using DatingApp.API.Data;
 using DatingApp.API.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -19,7 +20,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-
+// using Microsoft.Extensions.DependencyInjection;
 namespace DatingApp.API
 {
   public class Startup
@@ -35,18 +36,32 @@ namespace DatingApp.API
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-      services.AddControllers();
+      services.AddControllers().AddNewtonsoftJson(opt =>
+      {
+        opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+      });
       services.AddScoped<IAuthRepository, AuthRepository>();
+      services.AddScoped<IDatingRepository, DatingRepository>();
+      services.Configure<CloudinarySettings>(Configuration.GetSection(CloudinarySettings.Position));
+      services.AddAutoMapper(typeof(DatingRepository));
+
+      // services.AddAutoMapper(c => c.AddProfile<AutoMapping>(), typeof(Startup));
       services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+
       .AddJwtBearer(option =>
       {
+
         option.TokenValidationParameters = new TokenValidationParameters
         {
+
           ValidateIssuerSigningKey = true,
+
           IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
             .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
           ValidateIssuer = false,
-          ValidateAudience = false
+          ValidateAudience = false,
+
+
         };
       });
     }
@@ -82,11 +97,11 @@ namespace DatingApp.API
 
 
       app.UseRouting();
-      app.UseAuthentication(); // this one first
+      app.UseAuthentication(); // who you are
       app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 
-      app.UseAuthorization();
+      app.UseAuthorization();//are you allowed
 
 
       app.UseEndpoints(endpoints =>

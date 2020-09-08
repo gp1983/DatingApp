@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-sm-4">
+      <div class="card">
+        <img class="card-img-top img-thumbnail" src="{{user.photoUrl}}" alt="{{user.knownAs}}">
+        <div class="card-body">
+          <div>
+            <strong>Location:
+            </strong>
+            <p>{{user.city | uppercase}}, {{user?.country}}</p>
+          </div>
+          <div>
+            <strong>Age:
+            </strong>
+            <p>{{user.age}}</p>
+          </div>
+          <div>
+            <strong>Last Active:
+            </strong>
+            <p>{{user.lastActive |  date:'mediumDate'}}</p>
+          </div>
+          <div>
+            <strong>Member since:
+            </strong>
+            <p>{{user.created |  date:'mediumDate'}}</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div>
+            <button class="btn btn-primary mr-2">Like</button>
+            <button class="btn btn-success">Messages</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 ">
+      <div>
+        <tabset class="member-tabset">
+          <tab heading="Basic title" id="tab1">
+            <h4 class="mt-4">Description</h4>
+            <p>{{user.introduction}}</p>
+            <h4>Looking For</h4>
+            <p>{{ user.lookingFor}}</p>
+          </tab>
+          <tab heading="Basic Title 1">
+            <h4 class="mt-4">Intersted</h4>
+            <p>{{user.interests}}</p>
+
+          </tab>
+          <tab heading="Basic Title 2">
+            <p class="mt-4">Photo will go here</p>
+            <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+</div>
