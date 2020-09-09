@@ -1,6 +1,7 @@
 <div class="row">
   <div class=" col-md-3 " *ngFor="let photo of photos">
-    <img src="{{photo.url}}" class="img-thumbnail">
+    <img src="{{photo.url && photo.url != '' ? photo.url : '/assets/user.png' }}" class="img-thumbnail">
+
     <div class=" justify-content-between">
       <button class="btn btn-sm text-white btn-secondary mr-3 " [ngClass]="{'btn-success': photo.isMain}"
         [disabled]="photo.isMain" (click)="setMain(photo.id)" text-light>Main</button>

@@ -1,0 +1,7 @@
+.input-group {
+  flex-wrap: wrap!important;
+}
+
+.invalid-feedback {
+  display: block !important;
+}

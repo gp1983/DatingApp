@@ -65,7 +65,7 @@ export class PhotoEditorComponent implements OnInit {
     this.userService.deletePhoto(this.authService.decodedToken.nameid, id).subscribe(
       (next) => {
         this.photos.splice(this.photos.findIndex(x => x.id === id), 1);
-        const photo = this.photos.find(x => x.id === id);
+        const photo = this.photos.find(x => x.isMain);
         if (photo == null) {
           this.userService.userImgUrl.next('');
         }

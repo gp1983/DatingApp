@@ -21,6 +21,7 @@ using Microsoft.Extensions.Options;
 
 namespace DatingApp.API.Controllers
 {
+  [ServiceFilter(typeof(LogUserActivity))]
   [Authorize]
   [Route("api/[controller]")]
   [ApiController]

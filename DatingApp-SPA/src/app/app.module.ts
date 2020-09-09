@@ -28,7 +28,9 @@ import { MemberEditComponent } from 'src/app/member/member-edit/member-edit.comp
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { PhotoEditorComponent } from './member/photo-editor/photo-editor.component';
 import { FileUploadModule } from 'ng2-file-upload';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { TimeAgoExtendsPipePipe } from '../app/pipe/TimeAgoExtendsPipePipe';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 export function tokenGetter() {
   return localStorage.getItem("token");
 }
@@ -47,6 +49,8 @@ export function tokenGetter() {
     MemberDetailsComponent,
     MemberEditComponent,
     PhotoEditorComponent,
+    TimeAgoExtendsPipePipe,
+
   ],
   imports: [
     BrowserModule,
@@ -55,6 +59,7 @@ export function tokenGetter() {
     TabsModule.forRoot(),
     NgxGalleryModule,
     FileUploadModule,
+    BsDatepickerModule.forRoot(),
     // JwtModule.forRoot({
     //   config: {
     //     tokenGetter: () => {
@@ -68,8 +73,10 @@ export function tokenGetter() {
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     AppRoutingModule,
+    ReactiveFormsModule,
   ],
   providers: [AuthService, ErrorInterceptorProvider, AlertifyService, UserService, MemberDetailsResolver, MemberListResolver],
   bootstrap: [AppComponent],
+
 })
 export class AppModule { }

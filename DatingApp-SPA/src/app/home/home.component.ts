@@ -9,10 +9,10 @@ import { HttpClient } from '@angular/common/http';
 export class HomeComponent implements OnInit {
   registerMode: boolean;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.registerMode = false;
+    this.registerMode = true;
   }
   registerToggle() {
     this.registerMode = true;
